@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block title %}Twitter Clone{% endblock %}
+
+{% block content %}
+	<table cellpadding="5" width="100%">
+		<tr>
+
+<!-- LEFT COLUMN -->
+			<td valign="top" width="35%">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="clearfix">
+							<div class="pull-left">
+							{% thumbnail profile.pic "50x50" crop="bottom" as image %}
+								<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}">
+							{% empty %}
+								<img src="/media/profile_pictures/generic-profile-pic.jpg" width="50" height="50" />
+							{% endthumbnail %}
+							</div>
+							<div class="pull-left">
+								<strong> &nbsp; {{ profile.user }}</strong>
+							</div>
+						</div>
+					</div>	
+					<table class="table">
+						<tr>
+							<td>
+								<form method="POST" action="#" name="tweet" id="tweet">
+									{% csrf_token %}
+									<textarea class="form-control" rows="4"></textarea>
+									<div class="clearfix" style="margin-top: 8px;">
+										<button class="btn btn-primary pull-right">Post Message</button>
+									</div>
+								</form>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</td>
+
+<!-- RIGHT COLUMN -->
+			<td valign="top">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h3>Recent Posts</h3>
+					</div>
+					<table class="table">
+<!-- TWEETS START -->
+						{% for post in latestPosts %}
+							<tr>
+								<td>
+									<div style="margin-left: 20px">{{ post }}</div>
+								</td>
+							</tr>
+						{% endfor %}
+<!-- TWEETS END -->
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table>
+{% endblock %}

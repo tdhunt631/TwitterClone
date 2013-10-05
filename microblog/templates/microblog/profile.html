@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load staticfiles %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+	<table cellpadding="5" width="100%">
+		<tr>
+<!-- LEFT COLUMN -->
+			<td valign="top" width="35%">
+				<div class="panel panel-default">
+					<div class="panel-body">
+					<div class="clearfix">
+						<div class="pull-left">
+						{% thumbnail myProfile.pic "50x50" crop="bottom" as image %}
+							<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}">
+						{% empty %}
+							<img src="/media/profile_pictures/generic-profile-pic.jpg" width="50" height="50" />
+						{% endthumbnail %}
+						</div>
+						<div class="pull-left">
+							<strong> &nbsp; {{ myProfile.user }}</strong>
+						</div>
+					</div>
+					</div>	
+					<table class="table">
+						<tr>
+							<th>Following</th>
+						</tr>
+						<!-- LIST OF FOLLOWING -->
+						{% for user in following.all %}
+							<tr><td>{{ user }}</td></tr>
+						{% endfor %}
+					</table>
+				</div>
+			</td>
+<!-- RIGHT COLUMN -->
+			<td valign="top">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h3>Profile</h3>
+					</div>
+					<table class="table">
+<!-- PROFILE START -->
+						<tr>
+							<td>
+								stuff here
+							</td>
+						</tr>
+						<tr>
+							<td class="text-center">
+								<button type="submit" class="btn btn-primary">Update Profile</button>	
+							</td>
+						</tr>
+<!-- PROFILE END -->
+					</table>
+				</div>
+			</td>
+		</tr>
+	</table>
+{% endblock %}
