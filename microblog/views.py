@@ -27,4 +27,12 @@ def profile(request):
 	}
 	return render(request, 'microblog/profile.html', context)
 
-
+@login_required
+def detail(request, user):
+	latestPosts = Post.objects.all().filter(profile=user)
+	profile = get_object_or_404(Profile, user=user)
+	context = {
+		'profile': profile,
+		'latestPosts': latestPosts,
+	}
+	return render(request, 'microblog/detail.html', context)

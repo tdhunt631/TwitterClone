@@ -29,7 +29,7 @@
 						<li><a href="/"><span class="glyphicon glyphicon-home"> Home</span></a></li>
 
                    		{% if user.is_authenticated %}
-							<li><a href="/"><span class="glyphicon glyphicon-user"> Me</span></a></li>
+							<li><a href="{% url 'microblog:detail' user.id %}"><span class="glyphicon glyphicon-user"> Me</span></a></li>
                     	{% endif %}
 					</ul>
 					<ul class="nav navbar-nav navbar-right">

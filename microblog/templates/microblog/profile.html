@@ -9,30 +9,28 @@
 		<tr>
 <!-- LEFT COLUMN -->
 			<td valign="top" width="35%">
-				<div class="panel panel-default">
-					<div class="panel-body">
-					<div class="clearfix">
-						<div class="pull-left">
-						{% thumbnail myProfile.pic "50x50" crop="bottom" as image %}
-							<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}">
-						{% empty %}
-							<img src="/media/profile_pictures/generic-profile-pic.jpg" width="50" height="50" />
-						{% endthumbnail %}
+				<div class="list-group">
+					<div class="list-group-item">
+						<div class="clearfix">
+							<div class="pull-left">
+							{% thumbnail myProfile.pic "50x50" crop="bottom" as image %}
+								<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}">
+							{% empty %}
+								<img src="/media/profile_pictures/generic-profile-pic.jpg" width="50" height="50" />
+							{% endthumbnail %}
+							</div>
+							<div class="pull-left">
+								<strong> &nbsp; {{ myProfile.user }}</strong>
+							</div>
 						</div>
-						<div class="pull-left">
-							<strong> &nbsp; {{ myProfile.user }}</strong>
-						</div>
-					</div>
 					</div>	
-					<table class="table">
-						<tr>
-							<th>Following</th>
-						</tr>
-						<!-- LIST OF FOLLOWING -->
-						{% for user in following.all %}
-							<tr><td>{{ user }}</td></tr>
-						{% endfor %}
-					</table>
+					<div class="list-group-item">		
+						<strong>Following</strong>
+					</div>		
+					<!-- LIST OF FOLLOWING -->
+					{% for user in following.all %}
+						<a style="padding-left: 30px" class="list-group-item" href="{% url 'microblog:detail' user.id %}">{{ user }}<span class="pull-right"><strong>>></strong></span></a>
+					{% endfor %}
 				</div>
 			</td>
 <!-- RIGHT COLUMN -->

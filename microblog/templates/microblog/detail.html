@@ -21,24 +21,9 @@
 							</div>
 							<div class="pull-left">
 								<strong> &nbsp; {{ profile.user }}</strong>
-								<br>
-								<a href="{% url 'microblog:profile' %}"><span style="padding-left: 10px; font-size: .888888888em; color: #999999;">view profile</span></a>
 							</div>
 						</div>
 					</div>	
-					<table class="table">
-						<tr>
-							<td>
-								<form method="POST" action="#" name="tweet" id="tweet">
-									{% csrf_token %}
-									<textarea class="form-control" rows="4"></textarea>
-									<div class="clearfix" style="margin-top: 8px;">
-										<button class="btn btn-primary pull-right">Post Message</button>
-									</div>
-								</form>
-							</td>
-						</tr>
-					</table>
 				</div>
 			</td>
 
@@ -46,7 +31,7 @@
 			<td valign="top">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<h3>Recent Posts</h3>
+						<h3>Recent Posts by {{ profile.user }}</h3>
 					</div>
 					<table class="table">
 <!-- TWEETS START -->
@@ -65,7 +50,7 @@
 				<!-- POST -->
 				<div class="pull-left" style="padding-left: 10px">
 					<div>
-						<a href="{% url 'microblog:detail' post.profile.user.id %}"><strong>{{ post.profile.user }}</strong></a>
+						<strong>{{ post.profile.user }}</strong>
 					</div>
 					<div>
 						{{ post }}
