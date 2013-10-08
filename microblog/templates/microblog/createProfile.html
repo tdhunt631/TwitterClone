@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Create a profile{% endblock %}
+
+{% block content %}
+	<form enctype="multipart/form-data" action="{% url 'microblog:createProfile' %}" method="POST" id="createForm" name="createForm">
+	{% csrf_token %}
+	<table class="table">
+	{{ profileForm.as_table }}
+	<tr><th></th><td class="text-right" >
+	<button type="submit" class="btn btn-primary">Create Profile</button>
+	</td></tr></table>
+	</form>
+{% endblock %}

@@ -31,3 +31,13 @@ class PostForm(ModelForm):
 		super(PostForm, self).__init__(*args,**kwargs)
 		self.fields['message'].widget.attrs['class'] = "form-control"
 		self.fields['message'].widget.attrs['rows'] = "4"
+
+class ProfileForm(ModelForm):
+	class Meta:
+		model = Profile
+		fields = ['pic', 'bio']
+		
+class CreateForm(ModelForm):
+	class Meta:
+		model = Profile
+		fields = ['pic', 'bio', 'following']

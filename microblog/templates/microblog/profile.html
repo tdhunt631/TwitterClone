@@ -25,7 +25,11 @@
 						</div>
 					</div>	
 					<div class="list-group-item">		
-						<strong>Following</strong>
+						{% if following.count > 0 %}
+							<strong>Following</strong>
+						{% else %}
+							<strong>Follow Someone!</strong>
+						{% endif %}
 					</div>		
 					<!-- LIST OF FOLLOWING -->
 					{% for user in following.all %}
@@ -37,13 +41,21 @@
 			<td valign="top">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<h3>Profile</h3>
+						<h3>Profile for {{ myProfile.user }}</h3>
 					</div>
+			       <form enctype="multipart/form-data" action="{% url 'microblog:updateProfile' %}" method="POST" id="updateForm" name="updateForm">
+						{% csrf_token %}
 					<table class="table">
 <!-- PROFILE START -->
 						<tr>
 							<td>
-								stuff here
+								{% thumbnail myProfile.pic "50x50" crop="bottom" as image %}
+									<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}">
+								{% empty %}
+									<img src="/media/profile_pictures/generic-profile-pic.jpg" width="50" height="50" />
+								{% endthumbnail %}
+		
+								{{ profileForm.as_p }}
 							</td>
 						</tr>
 						<tr>
@@ -53,6 +65,7 @@
 						</tr>
 <!-- PROFILE END -->
 					</table>
+					</form>
 				</div>
 			</td>
 		</tr>
