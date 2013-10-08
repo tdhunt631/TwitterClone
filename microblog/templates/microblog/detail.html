@@ -9,8 +9,8 @@
 
 <!-- LEFT COLUMN -->
 			<td valign="top" width="35%">
-				<div class="panel panel-default">
-					<div class="panel-body">
+				<div class="list-group">
+					<div class="list-group-item">
 						<div class="clearfix">
 							<div class="pull-left">
 							{% thumbnail profile.pic "50x50" crop="bottom" as image %}
@@ -23,7 +23,15 @@
 								<strong> &nbsp; {{ profile.user }}</strong>
 							</div>
 						</div>
-					</div>	
+					</div>				
+					<div class="list-group-item">
+						<strong>About {{ profile.user }}</strong>
+					</div>
+					<div class="list-group-item">
+						<p style="margin-left: 10px">
+							{{ profile.bio }}
+						</p>
+					</div>
 				</div>
 			</td>
 

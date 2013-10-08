@@ -3,6 +3,29 @@
 
 {% block title %}Twitter Clone{% endblock %}
 
+{% block extrascripts %}
+<script>
+$(function(){
+	$("#tweet").submit(function(e){
+		e.preventDefault();
+		$.ajax({
+			url: $(this).attr('action'),
+			type: "post",
+			data: $(this).serialize(),
+			success: function(d) {
+				$('#tweet')[0].reset();
+				$('#posts').html(d);	
+			},
+			error: function(d){
+				console.log(d);
+			},
+		});
+		return false;
+	});	
+});
+</script>
+{% endblock %}
+
 {% block content %}
 	<table cellpadding="5" width="100%">
 		<tr>
@@ -22,16 +45,16 @@
 							<div class="pull-left">
 								<strong> &nbsp; {{ profile.user }}</strong>
 								<br>
-								<a href="{% url 'microblog:profile' %}"><span style="padding-left: 10px; font-size: .888888888em; color: #999999;">view profile</span></a>
+								<a href="{% url 'microblog:profile' %}"><span style="padding-left: 10px; font-size: .8em; color: #999999;">view profile</span></a>
 							</div>
 						</div>
 					</div>	
 					<table class="table">
 						<tr>
 							<td>
-								<form method="POST" action="#" name="tweet" id="tweet">
+								<form method="POST" action="{% url 'microblog:addPost' profile.id %}" name="tweet" id="tweet">
 									{% csrf_token %}
-									<textarea class="form-control" rows="4"></textarea>
+									{{ postForm.as_p }}
 									<div class="clearfix" style="margin-top: 8px;">
 										<button class="btn btn-primary pull-right">Post Message</button>
 									</div>
@@ -48,7 +71,7 @@
 					<div class="panel-body">
 						<h3>Recent Posts</h3>
 					</div>
-					<table class="table">
+					<table id="posts" class="table">
 <!-- TWEETS START -->
 {% for post in latestPosts %}
 	<tr>
