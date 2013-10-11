@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
 {% load staticfiles %}
+{% load follow %}
 
 {% block title %}My Profile{% endblock %}
 
@@ -36,6 +37,7 @@
 						<a style="padding-left: 30px" class="list-group-item" href="{% url 'microblog:detail' user.id %}">{{ user }}<span class="pull-right"><strong>>></strong></span></a>
 					{% endfor %}
 				</div>
+				{% listProfiles %}
 			</td>
 <!-- RIGHT COLUMN -->
 			<td valign="top">

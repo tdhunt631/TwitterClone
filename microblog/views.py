@@ -89,3 +89,10 @@ def updateProfile(request):
 		form = ProfileForm(request.POST, request.FILES, instance=profile)
 		form.save()
 	return HttpResponseRedirect('/')
+
+@login_required
+def follow(request, user_id):
+	myProfile = get_object_or_404(Profile, user=request.user)
+	profile = get_object_or_404(Profile, user=user_id)
+	myProfile.following.add(profile)
+	return HttpResponseRedirect('/')

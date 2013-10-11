@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load thumbnail %}
+{% load follow %}
 
 {% block title %}Twitter Clone{% endblock %}
 
@@ -33,6 +34,7 @@
 						</p>
 					</div>
 				</div>
+				{% listProfiles %}
 			</td>
 
 <!-- RIGHT COLUMN -->

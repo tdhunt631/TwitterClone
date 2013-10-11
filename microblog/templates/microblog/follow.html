@@ -1,0 +1,8 @@
+<div class="list-group">
+	<div class="list-group-item">
+		<strong>People to follow:</strong>
+	</div>
+{% for profile in profiles %}
+<a style="padding-left: 30px" class="list-group-item" href="{% url 'microblog:follow' profile.id %}">{{ profile }}</a>
+{% endfor %}
+</div>
